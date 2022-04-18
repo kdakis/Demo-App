@@ -22,7 +22,7 @@ class DeviceSerializer(serializers.ModelSerializer):
 
     def get_time_since_create(self, object):
         now = datetime.now(timezone.utc)
-        create_date = object.time
+        create_date = object.published
         time_delta = timesince(create_date, now)
         return time_delta
         

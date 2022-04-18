@@ -80,7 +80,7 @@
                     .patch(`/api/v1/devices/${deviceID}/`, this.device)
                     .then(response => {
                         toast({
-                            message: 'The lead was updated',
+                            message: 'The Device was updated',
                             type: 'is-success',
                             dismissible: true,
                             pauseOnHover: true,

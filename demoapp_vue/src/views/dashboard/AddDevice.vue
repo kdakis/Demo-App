@@ -68,7 +68,7 @@
                     .post('/api/v1/devices/', device)
                     .then(response => {
                         toast({
-                            message: 'The lead was added',
+                            message: 'The Device was added',
                             type: 'is-success',
                             dismissible: true,
                             pauseOnHover: true,
@@ -79,7 +79,7 @@
                         this.$router.push('/dashboard/devices')
                     })
                     .catch(error => {
-                        console.log(error)
+                        console.log(error.response)
                     })
 
                 this.$store.commit('setIsLoading', false)
