@@ -24,7 +24,7 @@
                     <div class="field">
                         <label>IP Adress</label>
                         <div class="control">
-                            <input type="email" class="input" v-model="device.ip">
+                            <input type="text" class="input" v-model="device.ip">
                         </div>
                     </div>
 

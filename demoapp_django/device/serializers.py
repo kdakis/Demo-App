@@ -4,6 +4,7 @@ from django.utils.timesince import timesince
 from .models import Device
 from rest_framework import serializers
 from .models import Device
+from rest_framework.response import Response
 
 class DeviceSerializer(serializers.ModelSerializer):
 
@@ -29,7 +30,8 @@ class DeviceSerializer(serializers.ModelSerializer):
 
     def validate_serial_no(self, serial_no):
         if not re.findall('\d', serial_no) or not re.findall('[a-z]', serial_no):
-            raise serializers.ValidationError("The serial number must contain at least 1 digit(0-9) and 1 lowercase letter")
+            #return serializers.ValidationError("The serial number must contain at least 1 digit(0-9) and 1 lowercase letter")
+            raise Response({'error': 'The serial number must contain at least 1 digit(0-9) and 1 lowercase letter'})
         if serial_no[0:3] != 'sd-':
             serial_no = 'sd-' + serial_no
         return serial_no
