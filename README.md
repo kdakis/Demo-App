@@ -9,9 +9,11 @@
   
   pip install -r requirement.txt
   
-  python manage.py makemigration
+  python manage.py makemigration device
   
   python manage.py migrate
+
+  python manage.py loaddata users.json
   
   python manage.py runserver
   
@@ -23,8 +25,6 @@
   npm install
   
   npm run serve
-<<<<<<< HEAD
+
   ```
-=======
-  ```
->>>>>>> b42e0af (readme, requirements)
+
