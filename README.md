@@ -23,4 +23,8 @@
   npm install
   
   npm run serve
+<<<<<<< HEAD
   ```
+=======
+  ```
+>>>>>>> b42e0af (readme, requirements)
