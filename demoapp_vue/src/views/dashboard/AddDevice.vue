@@ -28,6 +28,10 @@
                         </div>
                     </div>
 
+                    <div class="notification is-danger" v-if="errors.length">
+                        <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+                    </div>
+
                     <div class="field">
                         <div class="control">
                             <button class="button is-success">Submit</button>
@@ -51,18 +55,16 @@
                 name: '',
                 serial_no: '',
                 ip: '',
+                errors: []
             }
         },
         methods: {
             async submitForm() {
-                this.$store.commit('setIsLoading', true)
-
-                const device = {
-                    name: this.name,
-                    serial_no: this.serial_no,
-                    ip: this.ip,
-             
-                }
+                    const device = {
+                        name: this.name,
+                        serial_no: this.serial_no,
+                        ip: this.ip,
+                    }
 
                 await axios
                     .post('/api/v1/devices/', device)
@@ -79,10 +81,17 @@
                         this.$router.push('/dashboard/devices')
                     })
                     .catch(error => {
-                        console.log(error.response)
+                        if (error.response) {
+                            for (const property in error.response.data) {
+                                this.errors.push(`${property}: ${error.response.data[property]}`)
+                            }
+                        } else if (error.message) {
+                            this.errors.push('Something went wrong. Please try again!')
+                        }
                     })
 
                 this.$store.commit('setIsLoading', false)
+                
             }
         }
     }

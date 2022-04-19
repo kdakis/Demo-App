@@ -8,7 +8,6 @@
 
         <div class="navbar-menu">
             <div class="navbar-end">
-                <router-link to="/dashboard/devices" class="navbar-item">Devices</router-link>
     
                 <div class="navbar-item">
                     <div class="buttons">
@@ -18,7 +17,8 @@
                         </template>
 
                         <template v-else>
-                            <router-link to="/dashboard/my-account" class="button is-info">My account</router-link>
+                            <router-link to="/dashboard/devices" class="button is-info">Devices</router-link>
+                            <button @click="logout()" class="button is-danger">Log out</button>
                         </template>
                     </div>
                 </div>
@@ -28,7 +28,27 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
-        name: 'Navbar'
+        name: 'Navbar',
+        methods: {
+            async logout() {
+                await axios
+                    .post('/api/v1/token/logout/')
+                    .then(response => {
+                        console.log('Logged out')
+                    })
+                    .catch(error => {
+                        console.log(JSON.stringify(error))
+                    })
+                
+                axios.defaults.headers.common['Authorization'] = ''
+                localStorage.removeItem('token')
+                this.$store.commit('removeToken')
+
+                this.$router.push('/')
+            }
+        }
     }
 </script>

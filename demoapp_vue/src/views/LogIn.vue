@@ -69,7 +69,7 @@
 
                         localStorage.setItem('token', token)
 
-                        this.$router.push('/dashboard/my-account')
+                        this.$router.push('/dashboard/devices')
                     })
                     .catch(error => {
                         if (error.response) {
